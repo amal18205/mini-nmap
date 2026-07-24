@@ -55,3 +55,11 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/amal18205/mini-nmap:latest
+
+      - name: Install pip-audit
+        run: |
+          pip install pip-audit
+
+      - name: Scan Python dependencies
+        run: |
+          pip-audit
