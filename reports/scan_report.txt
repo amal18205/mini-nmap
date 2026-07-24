@@ -1,9 +1,0 @@
-Mini-Nmap Scan Report
-=====================
-
-Target: 127.0.0.1
-Date: 2026-07-24 12:58:55.162030
-
-Results:
----------------------
-Port: 22 | State: OPEN | Banner: SSH
