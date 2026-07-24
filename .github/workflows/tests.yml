@@ -56,6 +56,12 @@ jobs:
           push: true
           tags: ghcr.io/amal18205/mini-nmap:latest
 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ghcr.io/amal18205/mini-nmap:latest
+          format: table
+
       - name: Install pip-audit
         run: |
           pip install pip-audit
