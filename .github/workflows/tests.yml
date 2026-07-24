@@ -9,39 +9,49 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
 
 jobs:
-
   test:
-
     runs-on: ubuntu-latest
 
-
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
 
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.14"
+      - name: Code quality check
+        run: |
+          flake8 .
 
+      - name: Run tests
+        run: |
+          pytest
 
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      - name: Build Docker image
+        run: |
+          docker build -t mini-nmap .
 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Run tests
-      run: |
-        pytest
-
-    - name: Code quality check
-      run: |
-        flake8 .
-
-    - name: Build Docker image
-      run: |
-        docker build -t mini-nmap .
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/amal18205/mini-nmap:latest
