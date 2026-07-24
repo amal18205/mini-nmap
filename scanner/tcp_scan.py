@@ -5,16 +5,21 @@ def scan_port(target, port):
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    sock.settimeout(1)
+    sock.settimeout(2)
 
-    result = sock.connect_ex((target, port))
+    try:
+        result = sock.connect_ex((target, port))
 
-    if result == 0:
-        print(f"Port {port} OPEN")
+        if result == 0:
+            return True, sock
+
+        else:
+            sock.close()
+            return False, None
+
+    except socket.error:
         sock.close()
-        return True
+        return False, None
 
-    else:
-        print(f"Port {port} CLOSED")
-        sock.close()
-        return False
+
+
