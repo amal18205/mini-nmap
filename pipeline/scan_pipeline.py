@@ -4,7 +4,7 @@ from pipeline.port_stage import discover_ports
 from pipeline.service_stage import detect_services
 from pipeline.report_stage import save_report, save_json_report
 
-def run_scan(target, start_port, end_port):
+def run_scan(target, start_port, end_port, threads):
 
     start_time = time.time()
 
@@ -12,7 +12,8 @@ def run_scan(target, start_port, end_port):
     open_ports = discover_ports(
         target,
         start_port,
-        end_port
+        end_port,
+        threads
     )
 
     # Stage 2: Identify services

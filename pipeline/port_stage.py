@@ -1,22 +1,42 @@
 from scanner.tcp_scan import scan_port
+from concurrent.futures import ThreadPoolExecutor
 
 
-def discover_ports(target, start_port, end_port):
+def scan_single_port(target, port):
+
+    is_open, sock = scan_port(target, port)
+
+    if is_open:
+
+        return {
+            "port": port,
+            "socket": sock
+        }
+
+    return None
+
+
+
+def discover_ports(target, start_port, end_port, threads):
 
     open_ports = []
 
-    for port in range(start_port, end_port + 1):
+    ports = range(start_port, end_port + 1)
 
-        is_open, sock = scan_port(target, port)
 
-        if is_open:
+    with ThreadPoolExecutor(max_workers=threads) as executor:
 
-            open_ports.append({
-                "port": port,
-                "socket": sock
-            })
+        results = executor.map(
+            lambda port: scan_single_port(target, port),
+            ports
+        )
 
-        else:
-            pass
+
+        for result in results:
+
+            if result:
+
+                open_ports.append(result)
+
 
     return open_ports
