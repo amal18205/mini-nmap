@@ -41,3 +41,7 @@ jobs:
     - name: Code quality check
       run: |
         flake8 .
+
+    - name: Build Docker image
+      run: |
+        docker build -t mini-nmap .
