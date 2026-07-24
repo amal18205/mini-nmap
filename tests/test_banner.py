@@ -27,7 +27,6 @@ def banner_server():
     server.close()
 
 
-
 def test_banner():
 
     thread = threading.Thread(
@@ -35,7 +34,6 @@ def test_banner():
     )
 
     thread.start()
-
 
     sock = socket.socket(
         socket.AF_INET,
@@ -46,15 +44,12 @@ def test_banner():
         ("127.0.0.1", 9997)
     )
 
-
     banner = grab_banner(
         sock,
         9997
     )
 
-
     assert "TEST-SERVER" in banner
-
 
     sock.close()
 

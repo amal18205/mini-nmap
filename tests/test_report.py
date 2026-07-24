@@ -13,18 +13,15 @@ def test_report_creation(tmp_path):
         }
     ]
 
-
     txt_file = save_report(
         "127.0.0.1",
         results
     )
 
-
     json_file = save_json_report(
         "127.0.0.1",
         results
     )
-
 
     assert os.path.exists(txt_file)
 

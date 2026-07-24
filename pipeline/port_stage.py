@@ -16,13 +16,11 @@ def scan_single_port(target, port):
     return None
 
 
-
 def discover_ports(target, start_port, end_port, threads):
 
     open_ports = []
 
     ports = range(start_port, end_port + 1)
-
 
     with ThreadPoolExecutor(max_workers=threads) as executor:
 
@@ -31,12 +29,10 @@ def discover_ports(target, start_port, end_port, threads):
             ports
         )
 
-
         for result in results:
 
             if result:
 
                 open_ports.append(result)
-
 
     return open_ports

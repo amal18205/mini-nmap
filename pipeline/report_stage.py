@@ -14,10 +14,8 @@ def save_report(target, results):
         file.write(f"Target: {target}\n")
         file.write(f"Date: {datetime.now()}\n\n")
 
-
         file.write("Results:\n")
         file.write("---------------------\n")
-
 
         for result in results:
 
@@ -27,8 +25,8 @@ def save_report(target, results):
                 f"Banner: {result['banner']}\n"
             )
 
-
     return filename
+
 
 def save_json_report(target, results):
 

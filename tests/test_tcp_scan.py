@@ -4,7 +4,6 @@ import threading
 from scanner.tcp_scan import scan_port
 
 
-
 def start_test_server():
 
     server = socket.socket(
@@ -25,7 +24,6 @@ def start_test_server():
     server.close()
 
 
-
 def test_closed_port():
 
     result, sock = scan_port(
@@ -33,8 +31,7 @@ def test_closed_port():
         9999
     )
 
-    assert result == False
-
+    assert result is False
 
 
 def test_open_port():
@@ -45,14 +42,12 @@ def test_open_port():
 
     thread.start()
 
-
     result, sock = scan_port(
         "127.0.0.1",
         9998
     )
 
-
-    assert result == True
+    assert result is True
 
     sock.close()
 

@@ -1,12 +1,16 @@
 import sys
-import time
+
 
 from pipeline.scan_pipeline import run_scan
 
 
 # Vérification des arguments
 if len(sys.argv) < 4:
-    print("Usage: python main.py <target_ip> <start_port> <end_port> [--threads number]")
+    print(
+        "Usage: python main.py <target_ip> "
+        "<start_port> <end_port> "
+        "[--threads number]"
+    )
     exit()
 
 
@@ -54,7 +58,10 @@ if threads <= 0:
     exit()
 
 
-print(f"Scanning {target} from port {start_port} to {end_port}")
+print(
+    f"Scanning {target} "
+    f"from port {start_port} to {end_port}"
+)
 print(f"Using {threads} threads\n")
 
 

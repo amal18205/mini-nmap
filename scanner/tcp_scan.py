@@ -20,6 +20,3 @@ def scan_port(target, port):
     except socket.error:
         sock.close()
         return False, None
-
-
-
