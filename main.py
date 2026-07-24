@@ -1,4 +1,5 @@
 import sys
+import time
 from scanner.tcp_scan import scan_port
 
 if len(sys.argv) != 4:
@@ -22,5 +23,16 @@ if start_port > end_port:
 
 print(f"Scanning {target} from port {start_port} to {end_port}\n")
 
+open_ports = 0
+
+start_time = time.time()
+
 for port in range(start_port, end_port + 1):
-    scan_port(target, port)
+    if scan_port(target, port):
+        open_ports += 1
+end_time = time.time()
+scan_duration = end_time - start_time
+print("\n----------------------")
+print("Scan completed")
+print(f"Open ports found: {open_ports}")
+print(f"Scan duration: {scan_duration:.2f} seconds")

@@ -11,7 +11,10 @@ def scan_port(target, port):
 
     if result == 0:
         print(f"Port {port} OPEN")
+        sock.close()
+        return True
+
     else:
         print(f"Port {port} CLOSED")
-
-    sock.close()
+        sock.close()
+        return False
