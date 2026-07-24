@@ -2,9 +2,8 @@ Mini-Nmap Scan Report
 =====================
 
 Target: 127.0.0.1
-Date: 2026-07-24 11:39:57.005804
+Date: 2026-07-24 11:56:19.720384
 
 Results:
 ---------------------
-Port: 22 | State: OPEN | Banner: SSH-2.0-OpenSSH_10.2p1 Ubuntu-2ubuntu3.5
-Port: 631 | State: OPEN | Banner: No banner received
+Port: 22 | State: OPEN | Banner: SSH
